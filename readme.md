@@ -1,12 +1,12 @@
 # Micro frontend demo
 
-###Run the application
+### Run the application
 
     $ chmod 755 ./runApps.sh
     
     $ ./runApps.sh
 
-###The apps should correspond to the urls they are regustered in
+### The apps should correspond to the urls they are regustered in
     Each app by it's entryUrl member.
 
 
