@@ -5,9 +5,6 @@ export const routes = [{
   path: '',
   component: ShowsComponent
 }, {
-  path: 'show-details',
-  component: ShowsComponent
-}, {
-  path: 'show-details/:id',
+  path: ':id',
   component: ShowDetailsComponent
 }]

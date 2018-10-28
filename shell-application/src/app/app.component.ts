@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
     })
     appManager.initApps([
       {id: 'schedules', entryUrl: '/schedule/', title: 'schedules',  componentId: 'schedule-component'},
-      {id: 'show-details-app', entryUrl: '/show-details', title: 'Shows'},
+      {id: 'show-details', entryUrl: '/show-details-app/', title: 'Shows'},
      // {id: 'team-details', entryUrl: '/team-details-app', title: 'Team Details'}
     ])
     this.appsEventManager = (window as any).microAppsEventsManager;
