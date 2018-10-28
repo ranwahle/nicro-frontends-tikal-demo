@@ -14,6 +14,7 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
 
   show: Show;
   subscriptions: Subscription;
+  schedules: any[];
   constructor(private activaRoute: ActivatedRoute, private showsService: ShowsService) { }
 
   ngOnInit() {
@@ -30,7 +31,12 @@ export class ShowDetailsComponent implements OnInit, OnDestroy {
   }
 
   getShowSchedule(show: Show) {
-
+    const anyParent = window.parent as any;
+    anyParent.microAppsServiceManager.requestService('get-schedules').then(schedules => {
+      console.log('schedule', schedules)
+      this.schedules = schedules.filter(item => item.id === show.id );
+      console.log('schedules', this.schedules)
+    })
   }
 
 }

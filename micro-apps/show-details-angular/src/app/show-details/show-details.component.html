@@ -4,4 +4,12 @@
   <img [src]="show.image.medium">
 
   <button (click)="getShowSchedule(show)">Get Schedule </button>
+  <div *ngIf="schedules && schedules.length">
+    <ul>
+      <li *ngFor="let schedules of schedules"></li>
+    </ul>
+  </div>
+  <div *ngIf="schedules && schedules.length === 0">
+    No schedules found
+  </div>
 </div>
