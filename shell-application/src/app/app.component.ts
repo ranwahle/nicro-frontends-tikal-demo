@@ -3,6 +3,9 @@ import {EventManager} from '../../../lib/src/event-manager';
 import {Observable} from 'rxjs';
 import {MicroAppsManager} from '../../../lib';
 import {MicroAppInfo} from './model/micro-app-info';
+import {AppLoadedAction} from './store/app.actions';
+import {select, Store} from '@ngrx/store';
+import {microAppsSelector} from './store/app.selectors';
 
 @Component({
   selector: 'app-root',
@@ -14,15 +17,20 @@ export class AppComponent implements OnInit {
   microApps$: Observable<{ [appName: string]: MicroAppInfo }>
   private appsEventManager: EventManager;
 
+  constructor(private store: Store<any>) {
+
+  }
+
   ngOnInit() {
-   // this.microApps$ = this.store.select(microAppsSelector);
+    this.microApps$ = this.store.pipe(select(microAppsSelector));
     const appManager = new MicroAppsManager();
     appManager.configuraArea({
       frameContentFillingMethod: 'SourceUrl', frameAreaSelector: '#micro-apps-frame'
     })
-    appManager.initApps([{id: 'teams', entryUrl: '/teams-app/', title: 'teams',  componentId: 'teams-component', type: 'component'},
-      {id: 'games', entryUrl: '/games-app', title: 'games'},
-      {id: 'team-details', entryUrl: '/team-details-app', title: 'Team Details'}
+    appManager.initApps([
+      {id: 'schedules', entryUrl: '/schedule/', title: 'schedules',  componentId: 'schedule-component'},
+      {id: 'show-details-app', entryUrl: '/show-details', title: 'Shows'},
+     // {id: 'team-details', entryUrl: '/team-details-app', title: 'Team Details'}
     ])
     this.appsEventManager = (window as any).microAppsEventsManager;
 
@@ -30,12 +38,12 @@ export class AppComponent implements OnInit {
       'loaded', args => {
         const loadedApp =
           appManager.findAppByWindow(args.context);
-        // if (loadedApp) {
-        //   this.store.dispatch(new AppLoadedAction(loadedApp))
-        // } else {
-        //   this.store.dispatch(new AppLoadedAction( appManager.findAppByComponentName(args.context)))
-        //
-        // }
+        if (loadedApp) {
+          this.store.dispatch(new AppLoadedAction(loadedApp))
+        } else {
+          this.store.dispatch(new AppLoadedAction( appManager.findAppByComponentName(args.context)))
+
+        }
 
       });
 

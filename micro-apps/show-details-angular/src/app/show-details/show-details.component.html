@@ -1,0 +1,7 @@
+<div *ngIf="show">
+<h3>{{show.name}}</h3>
+
+  <img [src]="show.image.medium">
+
+  <button (click)="getShowSchedule(show)">Get Schedule </button>
+</div>

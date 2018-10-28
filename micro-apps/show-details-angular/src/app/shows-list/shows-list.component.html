@@ -1,0 +1,6 @@
+
+<ul>
+  <li *ngFor="let show of shows">
+    <a [routerLink]="['./' + show.id]">{{show.name}}</a>
+  </li>
+</ul>

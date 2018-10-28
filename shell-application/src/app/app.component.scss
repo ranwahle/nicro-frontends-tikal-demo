@@ -1,0 +1,12 @@
+:host {
+  #micro-apps-frame {
+    display: block;
+    iframe {
+      width: 100%;
+      border-style: none;
+    }
+  }
+}
+iframe {
+  width: 100%;
+}
